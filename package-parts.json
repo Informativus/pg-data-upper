@@ -1,0 +1,183 @@
+{
+  "version": "1.0.0",
+  "archiveName": "pg-data-upper-kit-1.0.0.tar.gz",
+  "archiveSha256": "4a6db7970c35a69ca1153a9652b8e08df623e0e0c6251b72632c1194eb9ab449",
+  "defaultInstallDir": "pg-data-upper-kit",
+  "partScope": "@greenbabuino",
+  "partNamePrefix": "pg-data-upper-part-",
+  "partVersion": "1.0.0",
+  "parts": [
+    {
+      "package": "@greenbabuino/pg-data-upper-part-001",
+      "file": "part-001.bin"
+    },
+    {
+      "package": "@greenbabuino/pg-data-upper-part-002",
+      "file": "part-002.bin"
+    },
+    {
+      "package": "@greenbabuino/pg-data-upper-part-003",
+      "file": "part-003.bin"
+    },
+    {
+      "package": "@greenbabuino/pg-data-upper-part-004",
+      "file": "part-004.bin"
+    },
+    {
+      "package": "@greenbabuino/pg-data-upper-part-005",
+      "file": "part-005.bin"
+    },
+    {
+      "package": "@greenbabuino/pg-data-upper-part-006",
+      "file": "part-006.bin"
+    },
+    {
+      "package": "@greenbabuino/pg-data-upper-part-007",
+      "file": "part-007.bin"
+    },
+    {
+      "package": "@greenbabuino/pg-data-upper-part-008",
+      "file": "part-008.bin"
+    },
+    {
+      "package": "@greenbabuino/pg-data-upper-part-009",
+      "file": "part-009.bin"
+    },
+    {
+      "package": "@greenbabuino/pg-data-upper-part-010",
+      "file": "part-010.bin"
+    },
+    {
+      "package": "@greenbabuino/pg-data-upper-part-011",
+      "file": "part-011.bin"
+    },
+    {
+      "package": "@greenbabuino/pg-data-upper-part-012",
+      "file": "part-012.bin"
+    },
+    {
+      "package": "@greenbabuino/pg-data-upper-part-013",
+      "file": "part-013.bin"
+    },
+    {
+      "package": "@greenbabuino/pg-data-upper-part-014",
+      "file": "part-014.bin"
+    },
+    {
+      "package": "@greenbabuino/pg-data-upper-part-015",
+      "file": "part-015.bin"
+    },
+    {
+      "package": "@greenbabuino/pg-data-upper-part-016",
+      "file": "part-016.bin"
+    },
+    {
+      "package": "@greenbabuino/pg-data-upper-part-017",
+      "file": "part-017.bin"
+    },
+    {
+      "package": "@greenbabuino/pg-data-upper-part-018",
+      "file": "part-018.bin"
+    },
+    {
+      "package": "@greenbabuino/pg-data-upper-part-019",
+      "file": "part-019.bin"
+    },
+    {
+      "package": "@greenbabuino/pg-data-upper-part-020",
+      "file": "part-020.bin"
+    },
+    {
+      "package": "@greenbabuino/pg-data-upper-part-021",
+      "file": "part-021.bin"
+    },
+    {
+      "package": "@greenbabuino/pg-data-upper-part-022",
+      "file": "part-022.bin"
+    },
+    {
+      "package": "@greenbabuino/pg-data-upper-part-023",
+      "file": "part-023.bin"
+    },
+    {
+      "package": "@greenbabuino/pg-data-upper-part-024",
+      "file": "part-024.bin"
+    },
+    {
+      "package": "@greenbabuino/pg-data-upper-part-025",
+      "file": "part-025.bin"
+    },
+    {
+      "package": "@greenbabuino/pg-data-upper-part-026",
+      "file": "part-026.bin"
+    },
+    {
+      "package": "@greenbabuino/pg-data-upper-part-027",
+      "file": "part-027.bin"
+    },
+    {
+      "package": "@greenbabuino/pg-data-upper-part-028",
+      "file": "part-028.bin"
+    },
+    {
+      "package": "@greenbabuino/pg-data-upper-part-029",
+      "file": "part-029.bin"
+    },
+    {
+      "package": "@greenbabuino/pg-data-upper-part-030",
+      "file": "part-030.bin"
+    },
+    {
+      "package": "@greenbabuino/pg-data-upper-part-031",
+      "file": "part-031.bin"
+    },
+    {
+      "package": "@greenbabuino/pg-data-upper-part-032",
+      "file": "part-032.bin"
+    },
+    {
+      "package": "@greenbabuino/pg-data-upper-part-033",
+      "file": "part-033.bin"
+    },
+    {
+      "package": "@greenbabuino/pg-data-upper-part-034",
+      "file": "part-034.bin"
+    },
+    {
+      "package": "@greenbabuino/pg-data-upper-part-035",
+      "file": "part-035.bin"
+    },
+    {
+      "package": "@greenbabuino/pg-data-upper-part-036",
+      "file": "part-036.bin"
+    },
+    {
+      "package": "@greenbabuino/pg-data-upper-part-037",
+      "file": "part-037.bin"
+    },
+    {
+      "package": "@greenbabuino/pg-data-upper-part-038",
+      "file": "part-038.bin"
+    },
+    {
+      "package": "@greenbabuino/pg-data-upper-part-039",
+      "file": "part-039.bin"
+    },
+    {
+      "package": "@greenbabuino/pg-data-upper-part-040",
+      "file": "part-040.bin"
+    },
+    {
+      "package": "@greenbabuino/pg-data-upper-part-041",
+      "file": "part-041.bin"
+    },
+    {
+      "package": "@greenbabuino/pg-data-upper-part-042",
+      "file": "part-042.bin"
+    },
+    {
+      "package": "@greenbabuino/pg-data-upper-part-043",
+      "file": "part-043.bin"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "name": "pg-data-upper",
+  "version": "1.0.0",
+  "description": "Installer for the pg-data-upper offline exam kit.",
+  "bin": {
+    "pg-data-upper": "bin/pg-data-upper.js"
+  },
+  "files": [
+    "bin/",
+    "package-parts.json",
+    "README.md"
+  ],
+  "scripts": {
+    "build:parts": "node scripts/build-parts.js",
+    "start": "node bin/pg-data-upper.js",
+    "pack:dry-run": "npm pack --dry-run"
+  },
+  "keywords": [
+    "offline",
+    "installer",
+    "exam"
+  ],
+  "author": "",
+  "license": "UNLICENSED"
+}

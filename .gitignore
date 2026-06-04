@@ -1,0 +1,16 @@
+.DS_Store
+.dist/
+.npm-parts/
+node_modules/
+npm-debug.log*
+
+INSTRUKCIYA_WINDOWS_OFFLINE.txt
+Modelfile
+OllamaSetup.exe
+SHA256SUMS.txt
+car-rental-task/
+cleanup-offline.ps1
+database-admin-task/
+models/
+offline-setup.ps1
+opencode-windows-x64.zip
