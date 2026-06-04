@@ -2,6 +2,8 @@
 
 const crypto = require("crypto");
 const fs = require("fs");
+const http = require("http");
+const https = require("https");
 const os = require("os");
 const path = require("path");
 const { spawnSync } = require("child_process");
@@ -68,27 +70,49 @@ function sha256(filePath) {
 }
 
 function appendFile(source, destination) {
-  fs.appendFileSync(destination, fs.readFileSync(source));
+  return new Promise((resolve, reject) => {
+    const input = fs.createReadStream(source);
+    const output = fs.createWriteStream(destination, { flags: "a" });
+    input.on("error", reject);
+    output.on("error", reject);
+    output.on("finish", resolve);
+    input.pipe(output);
+  });
 }
 
 function rmrf(target) {
   fs.rmSync(target, { recursive: true, force: true });
 }
 
-function findExtractedPart(root, partFileName) {
-  const stack = [root];
-  while (stack.length > 0) {
-    const current = stack.pop();
-    for (const entry of fs.readdirSync(current, { withFileTypes: true })) {
-      const fullPath = path.join(current, entry.name);
-      if (entry.isDirectory()) {
-        stack.push(fullPath);
-      } else if (entry.name === partFileName) {
-        return fullPath;
+function downloadFile(url, destination, redirects = 0) {
+  return new Promise((resolve, reject) => {
+    const client = url.startsWith("https:") ? https : http;
+    const request = client.get(url, response => {
+      if ([301, 302, 303, 307, 308].includes(response.statusCode)) {
+        response.resume();
+        if (!response.headers.location || redirects >= 5) {
+          reject(new Error(`Too many redirects while downloading ${url}`));
+          return;
+        }
+        const nextUrl = new URL(response.headers.location, url).toString();
+        downloadFile(nextUrl, destination, redirects + 1).then(resolve, reject);
+        return;
       }
-    }
-  }
-  throw new Error(`Could not find ${partFileName} after package extraction`);
+
+      if (response.statusCode !== 200) {
+        response.resume();
+        reject(new Error(`Download failed ${response.statusCode} for ${url}`));
+        return;
+      }
+
+      const output = fs.createWriteStream(destination);
+      output.on("finish", resolve);
+      output.on("error", reject);
+      response.on("error", reject);
+      response.pipe(output);
+    });
+    request.on("error", reject);
+  });
 }
 
 async function install(args) {
@@ -112,25 +136,22 @@ async function install(args) {
     fs.writeFileSync(archivePath, "");
 
     console.log(`Installing pg-data-upper offline kit into: ${installDir}`);
-    console.log(`Downloading ${manifest.parts.length} npm package parts...`);
+    if (!manifest.source || manifest.source.type !== "github-raw" || !manifest.source.baseUrl) {
+      throw new Error("Installer manifest source is invalid.");
+    }
 
-    manifest.parts.forEach((part, index) => {
-      const packageSpec = `${part.package}@${manifest.partVersion}`;
-      const partWorkDir = path.join(tempDir, `part-${String(index + 1).padStart(3, "0")}`);
-      fs.mkdirSync(partWorkDir, { recursive: true });
+    console.log(`Downloading ${manifest.parts.length} GitHub parts...`);
 
-      process.stdout.write(`[${index + 1}/${manifest.parts.length}] ${packageSpec}\n`);
-      const packOutput = run("npm", ["pack", packageSpec, "--pack-destination", partWorkDir], { capture: true });
-      const tarballName = packOutput.trim().split(/\r?\n/).filter(Boolean).pop();
-      if (!tarballName) {
-        throw new Error(`npm pack did not return a tarball name for ${packageSpec}`);
-      }
+    for (let index = 0; index < manifest.parts.length; index += 1) {
+      const part = manifest.parts[index];
+      const partPath = path.join(tempDir, part.file);
+      const partUrl = `${manifest.source.baseUrl}/${encodeURIComponent(part.file)}`;
 
-      const tarballPath = path.join(partWorkDir, tarballName);
-      run("tar", ["-xzf", tarballPath, "-C", partWorkDir]);
-      const extractedPart = findExtractedPart(partWorkDir, part.file);
-      appendFile(extractedPart, archivePath);
-    });
+      process.stdout.write(`[${index + 1}/${manifest.parts.length}] ${part.file}\n`);
+      await downloadFile(partUrl, partPath);
+      await appendFile(partPath, archivePath);
+      fs.rmSync(partPath, { force: true });
+    }
 
     const actualSha = await sha256(archivePath);
     if (actualSha !== manifest.archiveSha256) {

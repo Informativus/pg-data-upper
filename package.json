@@ -12,6 +12,7 @@
   ],
   "scripts": {
     "build:parts": "node scripts/build-parts.js",
+    "build:github-parts": "node scripts/build-github-parts.js",
     "start": "node bin/pg-data-upper.js",
     "pack:dry-run": "npm pack --dry-run"
   },
