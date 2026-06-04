@@ -1,14 +1,16 @@
-# pg-data-upper
+# Установка
 
-Installer for the offline exam kit.
+1. Откройте PowerShell.
+2. Выполните команду:
 
 ```powershell
 npx pg-data-upper install
 ```
 
-Install into a specific directory:
+Готово. Файлы появятся в папке `pg-data-upper-kit`.
+
+Нужна другая папка:
 
 ```powershell
 npx pg-data-upper install --dir C:\exam-kit
 ```
-

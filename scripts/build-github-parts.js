@@ -3,12 +3,12 @@ const fs = require("fs");
 const path = require("path");
 
 const rootDir = path.resolve(__dirname, "..");
-const archiveName = "pg-data-upper-kit-1.0.0.tar.gz";
+const archiveName = "pg-data-upper-kit-1.0.1.tar.gz";
 const archivePath = path.join(rootDir, ".dist", archiveName);
 const partsRoot = path.join(rootDir, "release-parts");
 const manifestPath = path.join(rootDir, "package-parts.json");
 
-const version = "1.0.0";
+const version = "1.0.1";
 const chunkSize = 45 * 1024 * 1024;
 
 function sha256(filePath) {
@@ -26,8 +26,12 @@ function writeJson(filePath, value) {
 }
 
 async function splitArchive() {
-  fs.rmSync(partsRoot, { recursive: true, force: true });
   fs.mkdirSync(partsRoot, { recursive: true });
+  for (const entry of fs.readdirSync(partsRoot)) {
+    if (entry.startsWith(`${archiveName}.part-`)) {
+      fs.rmSync(path.join(partsRoot, entry), { force: true });
+    }
+  }
 
   const parts = [];
   const input = fs.openSync(archivePath, "r");

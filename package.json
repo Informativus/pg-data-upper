@@ -1,6 +1,6 @@
 {
   "name": "pg-data-upper",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Installer for the pg-data-upper offline exam kit.",
   "bin": {
     "pg-data-upper": "bin/pg-data-upper.js"
